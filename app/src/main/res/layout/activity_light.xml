@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0FFF0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="#F5FFFA">
+        <Button
+            android:layout_width="match_parent"
+            android:id="@+id/kz1"
+            android:layout_height="200dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:background="#8ddee9"
+            android:gravity="center_vertical|center_horizontal"
+            android:text="Welcome to light!"
+            android:textSize="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/kz"
+            android:text="尚未控制灯光."
+            android:gravity="center_vertical|center_horizontal"
+            android:textSize="30dp"
+            android:background="#736867"
+            android:layout_height="match_parent" />
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>
+

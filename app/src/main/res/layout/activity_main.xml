@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F0FFF0">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:orientation="vertical"
+        android:background="#F5FFFA">
+
+        <Switch
+            android:id="@+id/identify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="20dp"
+            android:thumb="@drawable/thumb"
+            android:track="@drawable/track"
+            android:checked="false"
+            android:text="手势识别"
+            android:textSize="25dp"
+            android:background="#F0FFFF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/fun"
+            android:orientation="vertical"
+            android:layout_marginTop="20dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/swipe" />
+
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fun1"
+                    android:enabled="false"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="模拟滑动"
+                    android:thumb="@drawable/thumb"
+                    android:track="@drawable/track"
+                    android:textSize="20dp"
+                    android:checked="false"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/click" />
+
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fun2"
+                    android:enabled="false"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
+                    android:thumb="@drawable/thumb"
+                    android:track="@drawable/track"
+                    android:text="模拟点击"
+                    android:textSize="20dp"
+                    android:checked="false"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="10dp">
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginTop="12dp"
+                    android:src="@drawable/call" />
+
+                <Switch
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/fun3"
+                    android:enabled="false"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="12dp"
+                    android:layout_marginTop="12dp"
+                    android:text="来电接听"
+                    android:thumb="@drawable/thumb"
+                    android:track="@drawable/track"
+                    android:textSize="20dp"
+                    android:checked="false"/>
+            </LinearLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="     灵敏度调节      "
+            android:textSize="20dp"
+            android:layout_gravity="center"/>
+
+            <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+                android:id="@+id/sensitivity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:dsb_indicatorColor="#05b2f7"
+                app:dsb_indicatorFormatter="%03d"
+                app:dsb_indicatorTextAppearance="?android:attr/textAppearanceSmall"
+                app:dsb_progressColor="#040cf7"
+                app:dsb_max="100"
+                app:dsb_min="0"
+                app:dsb_trackColor="#6097f5"
+                app:dsb_rippleColor="#5a0afc" />
+
+        <!--<SeekBar
+            android:id="@+id/sensitivity"
+            android:layout_width="500px"
+            android:layout_height="100px"
+            android:layout_gravity="right"
+            android:max="100"/>-->
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
+
