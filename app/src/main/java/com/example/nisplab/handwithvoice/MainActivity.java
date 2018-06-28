@@ -36,6 +36,8 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     static public int sd=0;
+
+    private AcceptThread acceptThread;
     BluetoothServerSocket serverSocket;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -111,7 +113,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private BluetoothAdapter mBluetoothAdapter;
     public OutputStream out=null;
     public BluetoothSocket socket;
-    private final String tag = "zhangphil";
+    private final String tag = "1mmm";
     private final UUID MY_UUID = UUID
             .fromString("abcd1234-ab12-ab12-ab12-abcdef123456");
     private final String MY_UUI = "abcd1234-ab12-ab12-ab12-abcdef123456";
@@ -129,11 +131,14 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
         List<String> devices = new ArrayList<String>();
         Set<BluetoothDevice> bondedDevices = mBluetoothAdapter.getBondedDevices();
+        acceptThread = new AcceptThread();
+        acceptThread.start();
         for (BluetoothDevice device : bondedDevices) {
-            if (device.getName().equals("raspberrypi")) new Thread(new ClientThread(device)).start();
+            if (device.getName().equals("1mmm")) new Thread(new ClientThread(device)).start();
             Log.d(device.getName() + "-" + device.getAddress(), "onClick: ");
             devices.add(device.getName() + "-" + device.getAddress());
         }

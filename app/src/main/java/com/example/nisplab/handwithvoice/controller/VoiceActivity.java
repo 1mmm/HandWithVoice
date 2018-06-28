@@ -58,12 +58,12 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
     {
         @Override
         public void handleMessage(Message msg) {
-            //kz1.setText("正在控制音响！");
+            kz1.setText("正在控制音响！");
             alert = null;
             builder = new AlertDialog.Builder(VoiceActivity.this);
             alert = builder
                     .setTitle("提示：")
-                    .setMessage("申请失败，设备已被占用！").create();             //创建AlertDialog对象
+                    .setMessage("申请成功！").create();             //创建AlertDialog对象
             alert.show();
             Thread thread = new Thread()
             {
@@ -99,7 +99,6 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
             public void onClick(View v) {
                 sd=1-sd;
                 if (sd==1) {
-                    sd=0;
                     final ProgressDialog dialog = new ProgressDialog(VoiceActivity.this);
                     dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条
                     dialog.setCancelable(true);// 设置是否可以通过点击Back键取消
