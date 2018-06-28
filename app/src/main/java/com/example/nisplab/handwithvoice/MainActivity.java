@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     private class AcceptThread extends Thread {
         public AcceptThread() {
             try {
-                serverSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord("raspberrypi", MY_UUID);
+                serverSocket = mBluetoothAdapter.listenUsingRfcommWithServiceRecord("1mmm", MY_UUID);
             } catch (Exception e) {
             }
         }
