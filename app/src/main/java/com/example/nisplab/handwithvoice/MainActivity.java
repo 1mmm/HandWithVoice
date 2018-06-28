@@ -35,7 +35,7 @@ import static android.content.ContentValues.TAG;
 
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
-    static public int sd=0;
+    static public int sd=0+0;
     BluetoothServerSocket serverSocket;
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
