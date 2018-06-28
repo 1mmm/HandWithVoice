@@ -7,17 +7,14 @@ import android.os.Message;
 import android.util.Log;
 
 import com.example.nisplab.handwithvoice.AudioService;
-import com.example.nisplab.handwithvoice.MainActivity;
 
 import static android.content.ContentValues.TAG;
 import static android.media.AudioFormat.CHANNEL_CONFIGURATION_MONO;
 import static android.media.AudioFormat.ENCODING_PCM_16BIT;
 import static android.media.AudioManager.STREAM_MUSIC;
-import static android.media.AudioManager.STREAM_RING;
 import static android.media.AudioTrack.MODE_STREAM;
 import static com.example.nisplab.handwithvoice.ConstantValue.AUDIO_SAMPLE_RATE;
 import static com.example.nisplab.handwithvoice.ConstantValue.BUFFER_SIZE;
-import static com.example.nisplab.handwithvoice.ConstantValue.CAL_INTERVAL;
 import static com.example.nisplab.handwithvoice.ConstantValue.DIS_NEGA;
 import static com.example.nisplab.handwithvoice.ConstantValue.DIS_POSI;
 import static com.example.nisplab.handwithvoice.ConstantValue.FREQ_INTERVAL;
@@ -32,6 +29,7 @@ import static com.example.nisplab.handwithvoice.ConstantValue.TIME_INTERVAL;
  */
 
 public class AudioController {
+    static  public double tp;
     private AudioRecord m_in_rec;
     private AudioTrack m_out_tra;
     private int inBufferSize, outBufferSize, mCurPlayPos;
@@ -97,7 +95,7 @@ public class AudioController {
                 m_in_rec.read(rf.mRecDataBuffer, 0, 1920);
                 rf.mCurRecPos = 1920;
                 temp = rf.GetDistanceChange();
-
+                tp=temp;
                 // 阈值设定，根据移动距离和移动方向设定阈值
                 // 灵敏度越大，可识别的移动距离范围越广
                 if ((temp>-12.5-sensitivity&&temp<-2.5+sensitivity||temp<12.5+sensitivity&&temp>2.5-sensitivity)) {

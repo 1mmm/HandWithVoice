@@ -2,14 +2,15 @@ package com.example.nisplab.handwithvoice.function;
 
 
 import android.util.Log;
+
+import java.io.DataOutputStream;
+import java.io.OutputStream;
+
 import static android.content.ContentValues.TAG;
 import static com.example.nisplab.handwithvoice.ConstantValue.DOWN;
 import static com.example.nisplab.handwithvoice.ConstantValue.LEFT;
 import static com.example.nisplab.handwithvoice.ConstantValue.RIGHT;
 import static com.example.nisplab.handwithvoice.ConstantValue.UP;
-
-import java.io.DataOutputStream;
-import java.io.OutputStream;
 
 /**
  * Created by NIS&PLAB on 2017/6/29.
@@ -95,7 +96,7 @@ public class Gesture {
      * 后台模拟点击
      */
     public void tap() {
-        exec("input tap 850 850");
+        exec("input tap 900 620");
         Log.i(TAG, "........TAP......");
     }
 

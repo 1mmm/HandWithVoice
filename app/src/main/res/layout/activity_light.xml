@@ -4,31 +4,43 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0FFF0">
+    android:background="#F5FFFA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        android:background="#F5FFFA">
+        android:background="@mipmap/bg_triangles">
         <Button
             android:layout_width="match_parent"
             android:id="@+id/kz1"
             android:layout_height="200dp"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:background="#8ddee9"
+            android:background="#00000000"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Welcome to light!"
+            android:text="点击申请控制灯光"
             android:textSize="20dp"/>
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/kz"
-            android:text="尚未控制灯光."
-            android:gravity="center_vertical|center_horizontal"
-            android:textSize="30dp"
-            android:background="#736867"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:id="@+id/kz"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:background="@mipmap/dddd"
+                    android:layout_height="match_parent" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
 
 

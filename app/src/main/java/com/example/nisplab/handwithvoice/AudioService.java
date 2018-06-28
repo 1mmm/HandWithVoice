@@ -71,8 +71,8 @@ public class AudioService extends Service {
     private AudioManager manager;
 
     private Toast toast;
-
-    private int direction, sensitivity;  // 滑动方向，0表示左右滑动，1表示上下滑动
+    static public int direction;
+    private int  sensitivity;  // 滑动方向，0表示左右滑动，1表示上下滑动
     private boolean callCome = false;   // callCome表示是否有来电
     private boolean home, swipeState, tapState, isAnswer = false;   // isAnswer表示是否正处于接听状态
     private long moveTime, lastMove = 0, pauseTime = 0;
@@ -115,6 +115,14 @@ public class AudioService extends Service {
                 handle(msg);
             }
         };
+        delay = 0;
+        Log.i(TAG, "swipe on");
+//                toastShow("开启模拟滑动", Toast.LENGTH_SHORT, Gravity.BOTTOM, 0, 300);
+        simulateSwipe.setState(true);
+        Log.i(TAG, "tap on");
+        sensorManager.registerListener(simulateTap, sensorLight, SensorManager.SENSOR_DELAY_NORMAL);
+        simulateTap.setState(true);
+        registerReceiver(call, intentFilter);
     }
 
     @Override

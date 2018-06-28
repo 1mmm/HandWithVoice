@@ -4,31 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F0FFF0">
+    android:background="#F5FFFA">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        android:background="#F5FFFA">
+        android:background="@mipmap/bg_triangles">
         <Button
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:id="@+id/kz1"
+            android:background="#00000000"
             android:layout_gravity="center_horizontal|center_vertical"
-            android:background="#8ddee9"
             android:gravity="center_vertical|center_horizontal"
-            android:text="Welcome to audio!"
+            android:text="点击申请控制音响"
             android:textSize="20dp"/>
         <TextView
             android:layout_width="match_parent"
             android:id="@+id/kz"
             android:gravity="center_vertical|center_horizontal"
-            android:text="尚未控制音响."
             android:textSize="30dp"
-            android:background="#736867"
-            android:layout_height="match_parent" />
+            android:background="@mipmap/yx"
+            android:layout_height="wrap_content" />
 
 
 
