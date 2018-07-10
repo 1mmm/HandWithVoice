@@ -20,7 +20,7 @@ import com.example.nisplab.handwithvoice.R;
 import java.util.UUID;
 
 import static com.example.nisplab.handwithvoice.MainActivity.sd;
-
+import static com.example.nisplab.handwithvoice.MainActivity.zt;
 public class VoiceActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     public static byte[] strToByteArray(String str) { if (str == null) { return null; } byte[] byteArray = str.getBytes(); return byteArray; }
     private final UUID MY_UUID = UUID
@@ -59,6 +59,7 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
         @Override
         public void handleMessage(Message msg) {
             kz1.setText("正在控制音响！");
+            zt=2;
             alert = null;
             builder = new AlertDialog.Builder(VoiceActivity.this);
             alert = builder
@@ -164,6 +165,7 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
                 else
                 {
                     kz1.setText("点击申请控制音响");
+                    zt=3;
 
                 }
             }

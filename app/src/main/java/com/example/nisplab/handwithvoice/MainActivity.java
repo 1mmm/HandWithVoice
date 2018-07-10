@@ -36,6 +36,8 @@ import static android.content.ContentValues.TAG;
 
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     static public int sd=0;
+    static public int zt=0;
+
 
     private AcceptThread acceptThread;
     BluetoothServerSocket serverSocket;
@@ -59,8 +61,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 InputStream is = socket.getInputStream();
                 OutputStream os=socket.getOutputStream();
                 while(true) {
-                    os.write(strToByteArray("hhh\n"));
-                    os.flush();
+
                     byte[] buffer =new byte[1024];
                     int count = is.read(buffer);
                     Message msg = new Message();
@@ -100,7 +101,12 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                     try {
                         sleep(50);
 
-                        String s = (AudioService.direction==1?"777":"888")+AudioController.tp + "\n";
+                        String s = (AudioService.direction==1?"777":"888")+AudioController.tp ;
+                        if (zt==1) out.write(strToByteArray("5550"));
+                        else if (zt==2) out.write(strToByteArray("6660"));
+                        else if (zt==3) out.write(strToByteArray("4444"));
+                        out.flush();
+                        zt=0;
                         //Message msg = new Message();
                         //msg.obj = s;
                         //handler.sendMessage(msg);
@@ -110,9 +116,17 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                         byte[] buffer =new byte[1024];
                         int count =in.read(buffer);
                         String a= new String(buffer, 0, count, "utf-8");
-                        Message msg = new Message();
-                        msg.obj = "收到回报"+a;
-                        handler.sendMessage(msg);
+                        if (a.equals("5551") || a.equals("6661")) {
+                            Message msg = new Message();
+                            msg.obj = "收到回报:" + a;
+                            handler.sendMessage(msg);
+                        }
+                        if (a.equals("5552") || a.equals("6662")) {
+                            Message msg = new Message();
+                            msg.obj = "收到回报:" + a;
+                            handler.sendMessage(msg);
+                            sd=0;
+                        }
                     }catch (Exception e) {
                         Log.d(TAG, "连接失败 ");
                         e.printStackTrace();
@@ -155,7 +169,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
         acceptThread = new AcceptThread();
         acceptThread.start();
         for (BluetoothDevice device : bondedDevices) {
-            if (device.getName().equals("1mmm")) new Thread(new ClientThread(device)).start();
+            if (device.getName().equals("raspberrypi")) new Thread(new ClientThread(device)).start();
             Log.d(device.getName() + "-" + device.getAddress(), "onClick: ");
             devices.add(device.getName() + "-" + device.getAddress());
         }

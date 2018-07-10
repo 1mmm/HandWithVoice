@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import static com.example.nisplab.handwithvoice.MainActivity.sd;
-
+import static com.example.nisplab.handwithvoice.MainActivity.zt;
 public class LightActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     public GestureDetector detector;
     private Button kz1;
@@ -50,6 +50,7 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
         @Override
         public void handleMessage(Message msg) {
             kz1.setText("正在控制灯光！");
+            zt=1;
             alert = null;
             builder = new AlertDialog.Builder(LightActivity.this);
             alert = builder
@@ -154,6 +155,7 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
                 }
                 else {
                     kz1.setText("点击申请控制灯光");
+                    zt=3;
                    /* alert = null;
                     builder = new AlertDialog.Builder(LightActivity.this);
                     alert = builder
