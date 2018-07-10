@@ -57,15 +57,21 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
             try {
                 socket = serverSocket.accept();
                 InputStream is = socket.getInputStream();
+                OutputStream os=socket.getOutputStream();
                 while(true) {
+                    os.write(strToByteArray("hhh\n"));
+                    os.flush();
                     byte[] buffer =new byte[1024];
                     int count = is.read(buffer);
                     Message msg = new Message();
                     msg.obj = new String(buffer, 0, count, "utf-8");
                     handler.sendMessage(msg);
+                    os.write(strToByteArray("服务端收到！\n"));
+                    os.flush();
                 }
             }
             catch (Exception e) {
+                Log.d(TAG, "连接失败 ");
             }
         }
     }
@@ -89,16 +95,26 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 socket.connect();
                 Log.d(tag, "连接建立.");
                 out=socket.getOutputStream();
+                in=socket.getInputStream();
                 while (true) {
                     try {
                         sleep(50);
-                        String s = (AudioService.direction==1?"777":"888")+AudioController.tp + "\n";
-                        if (sd==1) {
-                            out.write(strToByteArray(s));
-                            out.flush();
-                        }
-                    }catch (Exception e) {
 
+                        String s = (AudioService.direction==1?"777":"888")+AudioController.tp + "\n";
+                        //Message msg = new Message();
+                        //msg.obj = s;
+                        //handler.sendMessage(msg);
+                        while (sd==0){sleep(50);}
+                        out.write(strToByteArray(s));
+                        out.flush();
+                        byte[] buffer =new byte[1024];
+                        int count =in.read(buffer);
+                        String a= new String(buffer, 0, count, "utf-8");
+                        Message msg = new Message();
+                        msg.obj = "收到回报"+a;
+                        handler.sendMessage(msg);
+                    }catch (Exception e) {
+                        Log.d(TAG, "连接失败 ");
                         e.printStackTrace();
                         break;
                     }
@@ -111,6 +127,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
     }
     public static byte[] strToByteArray(String str) { if (str == null) { return null; } byte[] byteArray = str.getBytes(); return byteArray; }
     private BluetoothAdapter mBluetoothAdapter;
+    public  InputStream in=null;
     public OutputStream out=null;
     public BluetoothSocket socket;
     private final String tag = "1mmm";
