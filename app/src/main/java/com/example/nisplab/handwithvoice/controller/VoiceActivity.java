@@ -15,10 +15,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.nisplab.handwithvoice.LightActivity;
 import com.example.nisplab.handwithvoice.R;
 
 import java.util.UUID;
 
+import static com.example.nisplab.handwithvoice.MainActivity.lj;
 import static com.example.nisplab.handwithvoice.MainActivity.sd;
 import static com.example.nisplab.handwithvoice.MainActivity.zt;
 public class VoiceActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
@@ -54,38 +56,83 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
             }, time);
         }
     }
-    public Handler handed = new Handler()
-    {
+    public Handler handeded = new Handler() {
         @Override
         public void handleMessage(Message msg) {
-            kz1.setText("正在控制音响！");
-            zt=2;
-            alert = null;
-            builder = new AlertDialog.Builder(VoiceActivity.this);
-            alert = builder
-                    .setTitle("提示：")
-                    .setMessage("申请成功！").create();             //创建AlertDialog对象
-            alert.show();
-            Thread thread = new Thread()
-            {
-                public void run()
-                {
-                    try
-                    {
-                        sleep(1000);
-                    } catch (InterruptedException e)
-                    {
-                        // TODO 自动生成的 catch 块
-                        e.printStackTrace();
-                    }
-                    // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
-                    // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
-                    alert.cancel();
+            if (lj == 1) {
+                if (sd==1) {
+                    kz1.setText("正在控制音响！");
+                    alert = null;
+                    builder = new AlertDialog.Builder(VoiceActivity.this);
+                    alert = builder
+                            .setTitle("提示：")
+                            .setMessage("申请成功！").create();             //创建AlertDialog对象
+                    alert.show();
+                    Thread thread = new Thread() {
+                        public void run() {
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                // TODO 自动生成的 catch 块
+                                e.printStackTrace();
+                            }
+                            // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                            // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                            alert.cancel();
 
 //                        dialog.dismiss();
+                        }
+                    };
+                    thread.start();
                 }
-            };
-            thread.start();
+                else{
+                    alert = null;
+                    builder = new AlertDialog.Builder(VoiceActivity.this);
+                    alert = builder
+                            .setTitle("提示：")
+                            .setMessage("申请失败，树莓派已被占用！").create();             //创建AlertDialog对象
+                    alert.show();
+                    Thread thread = new Thread() {
+                        public void run() {
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                // TODO 自动生成的 catch 块
+                                e.printStackTrace();
+                            }
+                            // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                            // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                            alert.cancel();
+
+//                        dialog.dismiss();
+                        }
+                    };
+                    thread.start();
+                }
+            } else {
+                alert = null;
+                builder = new AlertDialog.Builder(VoiceActivity.this);
+                alert = builder
+                        .setTitle("提示：")
+                        .setMessage("申请失败，树莓派未连接！").create();             //创建AlertDialog对象
+                alert.show();
+                Thread thread = new Thread() {
+                    public void run() {
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            // TODO 自动生成的 catch 块
+                            e.printStackTrace();
+                        }
+                        // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                        // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                        alert.cancel();
+
+//                        dialog.dismiss();
+                    }
+                };
+                thread.start();
+            }
         }
     };
     @Override
@@ -100,6 +147,7 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
             public void onClick(View v) {
                 sd=1-sd;
                 if (sd==1) {
+                    zt=2;
                     final ProgressDialog dialog = new ProgressDialog(VoiceActivity.this);
                     dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条
                     dialog.setCancelable(true);// 设置是否可以通过点击Back键取消
@@ -152,7 +200,7 @@ public class VoiceActivity extends AppCompatActivity implements GestureDetector.
                             }
                             // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
                             // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
-                            handed.sendEmptyMessage(5);
+                            handeded.sendEmptyMessage(5);
 
                             dialog.cancel();
 

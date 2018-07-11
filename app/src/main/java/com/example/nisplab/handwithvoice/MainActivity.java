@@ -37,6 +37,7 @@ import static android.content.ContentValues.TAG;
 public class MainActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
     static public int sd=0;
     static public int zt=0;
+    static public int lj=0;
 
 
     private AcceptThread acceptThread;
@@ -95,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements GestureDetector.O
                 Log.d(tag, "连接服务端...");
                 socket.connect();
                 Log.d(tag, "连接建立.");
+                lj=1;
                 out=socket.getOutputStream();
                 in=socket.getInputStream();
                 while (true) {

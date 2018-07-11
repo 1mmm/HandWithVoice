@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static com.example.nisplab.handwithvoice.MainActivity.lj;
 import static com.example.nisplab.handwithvoice.MainActivity.sd;
 import static com.example.nisplab.handwithvoice.MainActivity.zt;
 public class LightActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
@@ -45,39 +46,87 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
             }, time);
         }
     }
-    final Handler handed = new Handler()
+    final Handler handedad = new Handler()
     {
         @Override
         public void handleMessage(Message msg) {
-            kz1.setText("正在控制灯光！");
-            zt=1;
-            alert = null;
-            builder = new AlertDialog.Builder(LightActivity.this);
-            alert = builder
-                    .setTitle("提示：")
-                    .setMessage("申请成功！").create();             //创建AlertDialog对象
-            alert.show();
-            Thread thread = new Thread()
-            {
-                public void run()
-                {
-                    try
-                    {
-                        sleep(1000);
-                    } catch (InterruptedException e)
-                    {
-                        // TODO 自动生成的 catch 块
-                        e.printStackTrace();
-                    }
-                    // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
-                    // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
-                    alert.cancel();
+            if (lj == 1) {
+                if (sd==1) {
+                    kz1.setText("正在控制灯光！");
+                    alert = null;
+                    builder = new AlertDialog.Builder(LightActivity.this);
+                    alert = builder
+                            .setTitle("提示：")
+                            .setMessage("申请成功！").create();             //创建AlertDialog对象
+                    alert.show();
+                    Thread thread = new Thread() {
+                        public void run() {
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                // TODO 自动生成的 catch 块
+                                e.printStackTrace();
+                            }
+                            // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                            // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                            alert.cancel();
 
 //                        dialog.dismiss();
+                        }
+                    };
+                    thread.start();
                 }
-            };
-            thread.start();
+                else
+                {
+                    alert = null;
+                    builder = new AlertDialog.Builder(LightActivity.this);
+                    alert = builder
+                            .setTitle("提示：")
+                            .setMessage("申请失败，树莓派已被占用！").create();             //创建AlertDialog对象
+                    alert.show();
+                    Thread thread = new Thread() {
+                        public void run() {
+                            try {
+                                sleep(1000);
+                            } catch (InterruptedException e) {
+                                // TODO 自动生成的 catch 块
+                                e.printStackTrace();
+                            }
+                            // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                            // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                            alert.cancel();
+
+//                        dialog.dismiss();
+                        }
+                    };
+                    thread.start();
+                }
+            }
+        else{
+                alert = null;
+                builder = new AlertDialog.Builder(LightActivity.this);
+                alert = builder
+                        .setTitle("提示：")
+                        .setMessage("申请失败，树莓派未连接！").create();             //创建AlertDialog对象
+                alert.show();
+                Thread thread = new Thread() {
+                    public void run() {
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            // TODO 自动生成的 catch 块
+                            e.printStackTrace();
+                        }
+                        // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
+                        // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
+                        alert.cancel();
+
+//                        dialog.dismiss();
+                    }
+                };
+                thread.start();
         }
+    }
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,8 +139,10 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
             @Override
             public void onClick(View v) {
                 sd=1-sd;
+
                 if (sd==1)
                 {
+                    zt = 1;
                     final ProgressDialog dialog = new ProgressDialog(LightActivity.this);
                     dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条
                     dialog.setCancelable(true);// 设置是否可以通过点击Back键取消
@@ -136,7 +187,7 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
                         {
                             try
                             {
-                                sleep(2000);
+                                sleep(3000);
                             } catch (InterruptedException e)
                             {
                                 // TODO 自动生成的 catch 块
@@ -144,7 +195,7 @@ public class LightActivity extends AppCompatActivity implements GestureDetector.
                             }
                             // cancel和dismiss方法本质都是一样的，都是从屏幕中删除Dialog,唯一的区别是
                             // 调用cancel方法会回调DialogInterface.OnCancelListener如果注册的话,dismiss方法不会回掉
-                            handed.sendEmptyMessage(5);
+                            handedad.sendEmptyMessage(5);
                             dialog.cancel();
 
 //                        dialog.dismiss();
